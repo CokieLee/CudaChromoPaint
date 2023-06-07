@@ -1,0 +1,1 @@
+void lsf_cuda(int* colReads, int numSamples, double probTransition, double probError, int* prevStateProbs, int* currStateProbs);
