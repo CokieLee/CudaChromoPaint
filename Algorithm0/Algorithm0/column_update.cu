@@ -4,12 +4,18 @@
 
 #include <stdio.h>
 
-cudaError_t addWithCuda(int *c, const int *a, const int *b, unsigned int size);
-
-__global__ void Kernel(int *c, const int *a, const int *b)
+__global__ void ColumnUpdateKernel(int* colReads, int numSamples,
+    double probTransition, double probError, int* prevStateProbs, int* currStateProbs)
 {
     int i = threadIdx.x;
-    c[i] = a[i] + b[i];
+    for (int sample = 0; sample < numSamples; sample++) {
+        if (sample = i) {
+            currStateProbs[i] = (1 - probTransition) * probError;
+        }
+        else {
+            currStateProbs[i] = probTransition * probError;
+        }
+    }
 }
 
 int main()
